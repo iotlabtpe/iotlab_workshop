@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Lab 0 - Setup"
+title:  "Lab 0 - afr 101"
 categories: [lab]
 tags: [setup]
 excerpt_separator: <!--more-->

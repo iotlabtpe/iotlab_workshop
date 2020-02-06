@@ -1,10 +1,10 @@
 ---
 layout: post
-title:  "Lab 0 - Setup"
+title:  "Lab 2 - jitp"
 categories: [lab]
 tags: [setup]
 excerpt_separator: <!--more-->
-permalink: /lab/lab-0
+permalink: /lab/lab-2
 name: /lab/lab-2.html
 ---
 

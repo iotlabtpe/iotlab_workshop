@@ -1,1 +1,21 @@
 theme: jekyll-theme-cayman
+
+port: 4200
+
+language: english
+
+title: iot lab Workshop
+
+description: iot lab work shop
+
+logo: https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Amazon_Web_Services_Logo.svg/1280px-Amazon_Web_Services_Logo.svg.png
+
+favicon: ./assets/favicon.ico
+
+author: dhs
+
+# destination: ../docs
+
+# show_downloads: true
+
+# run jekyll with: bundle exec jekyll serve

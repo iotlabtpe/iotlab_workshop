@@ -1,37 +1,31 @@
-## Welcome to GitHub Pages
+# iotlab workshop
 
-You can use the [editor on GitHub](https://github.com/iotlabtpe/iotlab_workshop/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+brief description
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
 
-### Markdown
+## Introduction:
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+This workshop is designed for bla bla bla
 
-```markdown
-Syntax highlighted code block
+- Lab0: basic amazon freertos.
+- Lab1: amazon freertos ota
+- Lab2: just in time provisioin with Greengrass
+- Lab3: User provisioing approach
+- Lab4: Device auto provisioing approach
+- Lab5: iot sitewise?
 
-# Header 1
-## Header 2
-### Header 3
+## Start
 
-- Bulleted
-- List
+The workshop documentation and content is located [here](https://github.com/iotlabtpe/iotlab_workshop/)
 
-1. Numbered
-2. List
 
-**Bold** and _Italic_ and `Code` text
 
-[Link](url) and ![Image](src)
-```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
 
-### Jekyll Themes
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/iotlabtpe/iotlab_workshop/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
 
-### Support or Contact
 
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+# Disclaimer
+The following workshop material including documentation and code, is provided as is. You may incur AWS service costs for using the different resources outlined in the labs. Material is provided AS IS and is to be used at your own discretion. The author will not be responsible for any issues you may run into by using this material. 
+
+If you have any feedback, suggestions, please use the issues section.

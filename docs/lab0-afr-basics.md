@@ -15,4 +15,4 @@ Lab0 description
 
 ## cloen your code from
 
-git clone "your repo...."
+git clone "your repo..."

@@ -2,7 +2,7 @@
 layout: default
 ---
 
-Welcome to the iot lab workshop.... WIP
+Welcome to the iot lab workshop
 
 ## [lab0 amazon freertos basics]({{ "/lab/lab-0.html" | absolute_url }})
 

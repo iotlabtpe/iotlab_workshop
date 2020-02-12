@@ -1,6 +1,5 @@
 ---
 layout: post
-title:  "Lab 2 - jitp"
 categories: [lab]
 tags: [setup]
 excerpt_separator: <!--more-->

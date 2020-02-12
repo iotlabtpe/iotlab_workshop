@@ -7,6 +7,8 @@ permalink: /lab/lab-0
 name: /lab/lab-0.html
 ---
 
+# Lab 0: Build environment setup #
+
 If you follow the Setup guide, you will have nothing to do. The code first compiles to Lab 0
 
 Your device will boot up, and sends messages to AWS Cloud.

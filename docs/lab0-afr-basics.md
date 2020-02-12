@@ -1,6 +1,5 @@
 ---
-layout: post
-title:  "Lab 0 - afr 101"
+layout: default
 categories: [lab]
 tags: [lab0]
 excerpt_separator: <!--more-->

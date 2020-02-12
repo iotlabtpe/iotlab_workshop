@@ -1,6 +1,5 @@
 ---
-layout: post
-title:  "Lab 1 - ota"
+layout: default
 categories: [lab]
 tags: [setup]
 excerpt_separator: <!--more-->

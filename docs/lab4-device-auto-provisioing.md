@@ -1,6 +1,5 @@
 ---
-layout: post
-title:  "Lab 4 - device prov"
+layout: default
 categories: [lab]
 tags: [setup]
 excerpt_separator: <!--more-->

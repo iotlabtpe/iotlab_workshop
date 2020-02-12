@@ -1,6 +1,5 @@
 ---
-layout: post
-title:  "Lab 3 - user prov"
+layout: default
 categories: [lab]
 tags: [setup]
 excerpt_separator: <!--more-->

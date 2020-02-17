@@ -23,20 +23,21 @@ There are some components that involve in Amamzon FreeRTOS OTA updates:
 We will go through the following steps to finish Amazon FreeRTOS OTA demonstration  in this lab:
 
 1. Enable OTA agent and install initial version of firmware on ESP32
-1. Prepare signed new firmware image and create OTA updates using OTA update manager
-1. Deploy and activate new firmware image on ESP32
+1. Prepare a new signed firmware image and create OTA updates using OTA update manager
+1. Deploy and activate the new firmware image on ESP32
 
 ## Prerequisite ##
 
-1. Finish previous labs and make sure your board can connect to AWS IoT Core
-2. Create Amazon S3 bucket for storing the OTA image
+1. Install [openssl](https://www.openssl.org/) and add it to system path. Or you can just install [Git for Windows](https://git-scm.com/) which will automatically install openssl.
+2. Finish previous labs and make sure your board can connect to AWS IoT Core
+3. Create Amazon S3 bucket for storing the OTA image
    * Sign in to the Amazon [S3 console](https://console.aws.amazon.com/s3/)
    * Choose **Create bucket**, type bucket name, and select your region (it should be the same one that is showed in your AWS IoT console region)
     ![p5_s31.png](../pics/lab1/p5_s31.png)
    * Select **Versioning** to **Keep all versions in the same bucket**, and then choose **Next**
     ![p6_s32.png](../pics/lab1/p6_s32.png)
    * Choose **Next** to accept the default permissions
-3. Create an OTA update service role and permissions for the role
+4. Create an OTA update service role and permissions for the role
    * Create service role
      * Go to [IAM]( https://console.aws.amazon.com/iam/), and choose **Roles** from the navigation pane
      * Choose **Create role**, and select **IoT** for your use case
@@ -94,7 +95,7 @@ We will go through the following steps to finish Amazon FreeRTOS OTA demonstrati
 
         ![p10_role4.png](../pics/lab1/p10_role4.png)
 
-4. Add an OTA user policy
+5. Add an OTA user policy
     > We should grant our IAM user permission to perform OTA updates.
    * Go to [IAM]( https://console.aws.amazon.com/iam/), and choose **Users** from the navigation pane
    * Choose your IAM user from the list, and choose **Add permissions**
@@ -207,7 +208,7 @@ We will go through the following steps to finish Amazon FreeRTOS OTA demonstrati
         extendedKeyUsage = codeSigning
         ```
 
-   * Open git-bash
+   * Open your openssl command line tool (Or open git-bash if you installed Git for Windows)
 
         ![p1_git_bash](../pics/lab1/p1_git-bash.png)
 
@@ -238,7 +239,7 @@ We will go through the following steps to finish Amazon FreeRTOS OTA demonstrati
         "-----END CERTIFICATE-----\n";
         ```
 
-4. Build, install, and run firmware on ESP32 as previous labs
+4. Build, install, and run firmware on ESP32 by refering to previous labs
         ![p4_old-afr.png](../pics/lab1/p4_old-afr.png)
 
 ## Create OTA update ##

@@ -193,7 +193,7 @@ We will go through the following steps to finish Amazon FreeRTOS OTA demonstrati
 
 3. Code-signing certificate configuration
    > ESP32 support a self-signed **SHA-256 with ECDSA** code-signing certificate, we will use [openssl](https://www.openssl.org/) to generate private key and certificate
-   * In your working folder, create and edit cert_conf.txt. Replace YOUR_EMAIL_ADDRESS with your email address
+   * In your working folder, create and edit cert_config.txt. Replace YOUR_EMAIL_ADDRESS with your email address
 
         ```text
         [ req ]
@@ -239,6 +239,8 @@ We will go through the following steps to finish Amazon FreeRTOS OTA demonstrati
         "-----END CERTIFICATE-----\n";
         ```
 
+        ![p18_add-cert.png](../pics/lab1/p18_add-cert.png)
+
 4. Build, install, and run firmware on ESP32 by refering to previous labs
         ![p4_old-afr.png](../pics/lab1/p4_old-afr.png)
 
@@ -255,9 +257,9 @@ We will go through the following steps to finish Amazon FreeRTOS OTA demonstrati
 
    * Rebuild the new firmware image, the new image is put in \<AmazonFreeRTOS>/out/aws_demos.bin
 
-2. Create Amazon S3 bucket and upload the new image
+2. Upload the new image to your S3 bucket
    * Sign in to the Amazon [S3 console](https://console.aws.amazon.com/s3/)
-   * Select the bucket that you created in prerequisite, and choose upload icon to add your new aws_demos.bin image
+   * Select the bucket that you created in prerequisite, and choose **upload** icon to add your new aws_demos.bin image
 
 3. Create an OTA update
    * Go to AWS IoT console to create a job
@@ -273,6 +275,6 @@ We will go through the following steps to finish Amazon FreeRTOS OTA demonstrati
 
 ## Activate OTA update ##
 
-1. Connect to ESP32, and you will see the OTA agent is downloading, verifying, testing the new firmware image
+1. Connect to ESP32, and you will see the OTA agent is downloading, verifying, and testing the new firmware image
 2. The new version is showed after the new firmware image is installed
 ![p17_new-afr.png](../pics/lab1/p17_new-afr.png)

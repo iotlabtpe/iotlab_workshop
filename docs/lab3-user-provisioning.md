@@ -210,7 +210,10 @@ Here’s the tutorial for setting up AWS Service including AWS Cognito, AWS API 
             3. Then save.
         5. Configure GET - Method Execution
             ![API_Get_method_execution.png](../pics/user_provision_approach/API_Get_method_execution.png)
-            1. Configure Method Request
+            1. Configure Method Request:
+                Authorization:"IoTProvision_Authorizer"
+                URL QRL String Parameters, Name: "sn", then check Required.
+                HTTP Request Headers, Name: "Authorization", then check Required.
                ![API_Method_Request.png](../pics/user_provision_approach/API_Method_Request.png)
             2. Configure Integration Request
                ![API_Integration_Request_1.png](../pics/user_provision_approach/API_Integration_Request_1.png)
@@ -240,6 +243,7 @@ Here’s the tutorial for setting up AWS Service including AWS Cognito, AWS API 
                     ```
 
             4. Configure Method Response
+                Configure Response Body for 200, Contect type:"application/json", Models:"CertReply".
                 ![API_Method_Response.png](../pics/user_provision_approach/API_Method_Response.png)
     6. Deploy API to generate endpoint
         ![API_Deploy.png](../pics/user_provision_approach/API_Deploy.png)
@@ -260,6 +264,9 @@ Here’s the tutorial for setting up AWS Service including AWS Cognito, AWS API 
 
 1. Fill in app/src/main/java/com/amazonaws/youruserpools/AppHelper.java with the userPoolId, clientId, and clientSecret.
     1. check these information in your AWS Cognito Service:
+       Get User Pool ID from Pool ID.
+       ![Cognito_general_setting.png](../pics/user_provision_approach/Cognito_general_setting.png)
+       Get client id and client secret.
        ![info_in_cognito.png](../pics/user_provision_approach/info_in_cognito.png)
     2. Fill in these information at this location:
        ![cognito_info_in_code.png](../pics/user_provision_approach/cognito_info_in_code.png)

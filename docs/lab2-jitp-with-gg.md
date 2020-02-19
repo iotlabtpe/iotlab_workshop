@@ -269,188 +269,188 @@ Now, verify your role, it should have **greengrass_provision_policy**
 ![](../pics/lab2/p14_lab2.png)
 - Scroll down to the AWS Lambda function code section of the page. Replace the existing code with the following code, and click **Save**
     ```
-    import json
-    import boto3
-    import time
-    from botocore.exceptions import ClientError
+import json
+import boto3
+import time
+from botocore.exceptions import ClientError
 
-    iot = boto3.client('iot', region_name='ap-southeast-1')
-    dynamodb = boto3.client('dynamodb')
-    gg = boto3.client('greengrass', region_name='ap-southeast-1')
+iot = boto3.client('iot', region_name='ap-southeast-1')
+dynamodb = boto3.client('dynamodb')
+gg = boto3.client('greengrass', region_name='ap-southeast-1')
 
-    policy = {
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-        "Effect": "Allow",
-        "Action": [
-            "iot:Publish",
-            "iot:Subscribe",
-            "iot:Connect",
-            "iot:Receive"
-        ],
-        "Resource": [
-            "*"
-        ]
-        },
-        {
-        "Effect": "Allow",
-        "Action": [
-            "iot:GetThingShadow",
-            "iot:UpdateThingShadow",
-            "iot:DeleteThingShadow"
-        ],
-        "Resource": [
-            "*"
-        ]
-        },
-        {
-        "Effect": "Allow",
-        "Action": [
-            "greengrass:*"
-        ],
-        "Resource": [
-            "*"
-        ]
-        }
+policy = {
+"Version": "2012-10-17",
+"Statement": [
+    {
+    "Effect": "Allow",
+    "Action": [
+        "iot:Publish",
+        "iot:Subscribe",
+        "iot:Connect",
+        "iot:Receive"
+    ],
+    "Resource": [
+        "*"
+    ]
+    },
+    {
+    "Effect": "Allow",
+    "Action": [
+        "iot:GetThingShadow",
+        "iot:UpdateThingShadow",
+        "iot:DeleteThingShadow"
+    ],
+    "Resource": [
+        "*"
+    ]
+    },
+    {
+    "Effect": "Allow",
+    "Action": [
+        "greengrass:*"
+    ],
+    "Resource": [
+        "*"
     ]
     }
-    def delete_cert_and_policy(deviceId, principals):
-        for principal in principals:
-            certificateId = principal.split('/')[-1]
-            policies = iot.list_attached_policies(target=principal)
-            for policy in policies['policies']:
-                iot.detach_policy(
-                    policyName=policy['policyName'], target=principal
-                )
-                iot.delete_policy(policyName=policy['policyName'])
-            iot.update_certificate(
-                certificateId=certificateId, newStatus='INACTIVE'
+]
+}
+def delete_cert_and_policy(deviceId, principals):
+    for principal in principals:
+        certificateId = principal.split('/')[-1]
+        policies = iot.list_attached_policies(target=principal)
+        for policy in policies['policies']:
+            iot.detach_policy(
+                policyName=policy['policyName'], target=principal
             )
-            iot.detach_thing_principal(
-                thingName=deviceId,
-                principal=principal
-            )
-        while True:
-            resp = iotClient.list_thing_principals(
-                thingName=deviceId
-            )
-            if not resp['principals']:
-                break
-            time.sleep(1)
-
-    def lambda_handler(event, context):
-        global policy
-        print("event:  ", event)
-        certId = event['certificateId']
-        response = iot.describe_certificate(
-            certificateId=certId)
-        certificatePem = response['certificateDescription']['certificatePem']
-        print(certificatePem)
-        deviceId = 'device_jitr'  + '_0309_workshop'
-        certificateArn = response['certificateDescription']['certificateArn']
-
-        # create thing
-        try:
-            response = iot.describe_thing(
-                thingName=deviceId
-            )
-        except ClientError as e:
-            response = iot.create_thing(
-                thingName=deviceId
-            )
-        thingArn = response['thingArn']
-
-        # delete certificates which are attached to this thing
-        response = iot.list_thing_principals(
+            iot.delete_policy(policyName=policy['policyName'])
+        iot.update_certificate(
+            certificateId=certificateId, newStatus='INACTIVE'
+        )
+        iot.detach_thing_principal(
+            thingName=deviceId,
+            principal=principal
+        )
+    while True:
+        resp = iotClient.list_thing_principals(
             thingName=deviceId
         )
-        if response['principals']:
-            delete_cert_and_policy(deviceId, response['principals'])
+        if not resp['principals']:
+            break
+        time.sleep(1)
 
-        # generate keys and certificate
-        response = iot.describe_certificate(
-            certificateId=certId)
-        certificatePem = response['certificateDescription']['certificatePem']
-        certificateArn = response['certificateDescription']['certificateArn']
+def lambda_handler(event, context):
+    global policy
+    print("event:  ", event)
+    certId = event['certificateId']
+    response = iot.describe_certificate(
+        certificateId=certId)
+    certificatePem = response['certificateDescription']['certificatePem']
+    print(certificatePem)
+    deviceId = 'device_jitr'  + '_0309_workshop'
+    certificateArn = response['certificateDescription']['certificateArn']
 
-
-        # attach certificate to thing
-        policyDocument = json.dumps(policy)
-        iot.attach_thing_principal(
-            thingName=deviceId,
-            principal=certificateArn
+    # create thing
+    try:
+        response = iot.describe_thing(
+            thingName=deviceId
         )
-
-        try:
-            # create a policy for thing
-            policyName = 'Policy_' + deviceId
-            iot.create_policy(
-                policyName=policyName,
-                policyDocument=policyDocument
-            )
-        except ClientError as e:
-            print('policy exists', policyName)
-            raise(e)
-
-
-        try:
-            # attach policy to certificate
-            iot.attach_policy(
-                policyName=policyName,
-                target=certificateArn
-            )
-        except ClientError as e:
-            print('attach policy  failed')
-
-
-        iot.update_certificate(
-            certificateId=certId,                
-            newStatus='ACTIVE'
+    except ClientError as e:
+        response = iot.create_thing(
+            thingName=deviceId
         )
+    thingArn = response['thingArn']
 
-        # creating Greengrass group steps:
-        # 1. create_thing as avoce
-        # 2. create_core_definition
-        # 3. create group
-        # 4. create group version
-        groupName = 'jitr_group_' + deviceId
+    # delete certificates which are attached to this thing
+    response = iot.list_thing_principals(
+        thingName=deviceId
+    )
+    if response['principals']:
+        delete_cert_and_policy(deviceId, response['principals'])
 
-        try:
-            response = gg.get_group(GroupId=groupName)
-            print(groupName, 'exists')
-        except ClientError as e:
-            print(groupName, 'not exists, create one')
-            coreDefDeviceId = 'gg_core_' + deviceId
-            response = gg.create_core_definition(
-                InitialVersion={
-                    'Cores': [
-                        {
-                            'CertificateArn': certificateArn,
-                            'Id': deviceId,
-                            'SyncShadow': True,
-                            'ThingArn': thingArn
-                        },
-                    ]
-                },
-                Name=coreDefDeviceId
-            )
-            print(response)
-
-            CoreDefinitionVersionArn = response['LatestVersionArn']
-            print(CoreDefinitionVersionArn)
-
-            time.sleep(10)
+    # generate keys and certificate
+    response = iot.describe_certificate(
+        certificateId=certId)
+    certificatePem = response['certificateDescription']['certificatePem']
+    certificateArn = response['certificateDescription']['certificateArn']
 
 
-            group_info = gg.create_group(Name=groupName)
-            group_args = {'GroupId': group_info['Id']}
-            group_args['CoreDefinitionVersionArn'] = CoreDefinitionVersionArn
+    # attach certificate to thing
+    policyDocument = json.dumps(policy)
+    iot.attach_thing_principal(
+        thingName=deviceId,
+        principal=certificateArn
+    )
 
-            grp = gg.create_group_version(
-                        **group_args
-                    )
-            print(grp)
+    try:
+        # create a policy for thing
+        policyName = 'Policy_' + deviceId
+        iot.create_policy(
+            policyName=policyName,
+            policyDocument=policyDocument
+        )
+    except ClientError as e:
+        print('policy exists', policyName)
+        raise(e)
+
+
+    try:
+        # attach policy to certificate
+        iot.attach_policy(
+            policyName=policyName,
+            target=certificateArn
+        )
+    except ClientError as e:
+        print('attach policy  failed')
+
+
+    iot.update_certificate(
+        certificateId=certId,                
+        newStatus='ACTIVE'
+    )
+
+    # creating Greengrass group steps:
+    # 1. create_thing as avoce
+    # 2. create_core_definition
+    # 3. create group
+    # 4. create group version
+    groupName = 'jitr_group_' + deviceId
+
+    try:
+        response = gg.get_group(GroupId=groupName)
+        print(groupName, 'exists')
+    except ClientError as e:
+        print(groupName, 'not exists, create one')
+        coreDefDeviceId = 'gg_core_' + deviceId
+        response = gg.create_core_definition(
+            InitialVersion={
+                'Cores': [
+                    {
+                        'CertificateArn': certificateArn,
+                        'Id': deviceId,
+                        'SyncShadow': True,
+                        'ThingArn': thingArn
+                    },
+                ]
+            },
+            Name=coreDefDeviceId
+        )
+        print(response)
+
+        CoreDefinitionVersionArn = response['LatestVersionArn']
+        print(CoreDefinitionVersionArn)
+
+        time.sleep(10)
+
+
+        group_info = gg.create_group(Name=groupName)
+        group_args = {'GroupId': group_info['Id']}
+        group_args['CoreDefinitionVersionArn'] = CoreDefinitionVersionArn
+
+        grp = gg.create_group_version(
+                    **group_args
+                )
+        print(grp)
     ```
     it should look like the following
     ![](../pics/lab2/p15_lab2.png)

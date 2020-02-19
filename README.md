@@ -12,7 +12,6 @@ This workshop is designed for bla bla bla
 - Lab2: just in time provisioin with Greengrass
 - Lab3: User provisioing approach
 - Lab4: Device auto provisioing approach
-- Lab5: iot sitewise?
 
 ## Start
 

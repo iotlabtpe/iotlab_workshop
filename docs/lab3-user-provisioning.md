@@ -43,93 +43,9 @@ Here’s the tutorial for setting up AWS Service including AWS Cognito, AWS API 
         ![UserPool_AppClient_Name.png](../pics/user_provision_approach/UserPool_AppClient_Name.png)
     5. choose Create pool
        ![UserPool_CreatePool.png](../pics/user_provision_approach/UserPool_CreatePool.png)
-2. Setup **AWS API Gateway**
-    1. Create API, and then choose REST API.
-       ![Create_API.png](../pics/user_provision_approach/Create_API.png)
-    2. Choose NewAPI and fill in API name “IoTProvision_API”, then create.
-        ![Create_API_Name.png](../pics/user_provision_approach/Create_API_Name.png)
-        1. Now that, we can start configure the following settings with red rectangle, then back to setup Resource method.
 
-        ![API_configuration.png](../pics/user_provision_approach/API_configuration.png)
-    3. Authorizers configuration
-        1. Name: “IoTProvision_Authorizer” 
-        2. Select Cognito
-        3. Cognito User Pool “IoTProvisionUserPool”
-        4. Token Source “Authorization”
-        5. Create
-        ![API_Authorizer.png](../pics/user_provision_approach/API_Authorizer.png)
-    4. Model configuration
-        1. Create method used by API Method.
-            1. Name: “CertReplay“
-            2. Content type: “applicaiton/json”
-            3. Fill in Model schema.
-            ![API_Model.png](../pics/user_provision_approach/API_Model.png)
-
-            ```json
-            {
-              "$schema": "http://json-schema.org/draft-04/schema#",
-              "title": "IoTProvisionInputModel",
-              "type": "object",
-              "properties": {
-                "certificatePem": { "type": "string" },
-                "privateKey": { "type": "string" }
-              }
-            }
-            ```
-
-    5. Resource configuration
-        1. Resource Name “cert”
-        2. Create Resource
-            ![API_Resource_Create.png](../pics/user_provision_approach/API_Resource_Create.png)
-        3. Action → Create Method.
-            1. Select “GET”
-            ![API_Resorce_create_method.png](../pics/user_provision_approach/API_Resorce_create_method.png)
-        4. The method setup
-            ![API_Model_setup.png](../pics/user_provision_approach/API_Model_setup.png)
-            1. Integration type → Lambda function.
-            2. Lambda function → IoTProvision_Lambda
-            3. Then save.
-        5. Configure GET - Method Execution
-            ![API_Get_method_execution.png](../pics/user_provision_approach/API_Get_method_execution.png)
-            1. Configure Method Request
-               ![API_Method_Request.png](../pics/user_provision_approach/API_Method_Request.png)
-            2. Configure Integration Request
-               ![API_Integration_Request_1.png](../pics/user_provision_approach/API_Integration_Request_1.png)
-                1. application/json
-
-                    ```json
-                    #set($inputRoot = $input.path('$'))
-                    {
-                      "params": {
-                        "querystring": {
-                          "SN": "$input.params('sn')"
-                        }
-                      }
-                    }
-                    ```
-
-            3. Configure Integration Response
-                ![API_Integration_Response.png](../pics/user_provision_approach/API_Integration_Response.png)
-                1. application/json
-
-                    ```json
-                    #set($inputRoot = $input.path('$'))
-                    {
-                      "certificatePem" : $input.json('$.body.certificatePem'),
-                      "privateKey" : $input.json('$.body.privateKey')
-                    }
-                    ```
-
-            4. Configure Method Response
-                ![API_Method_Response.png](../pics/user_provision_approach/API_Method_Response.png)
-    6. Deploy API to generate endpoint
-        ![API_Deploy.png](../pics/user_provision_approach/API_Deploy.png)
-        ![API_Deploy_stage_name.png](../pics/user_provision_approach/API_Deploy_stage_name.png)
-    7. Check endpoint in Stages
-        ![API_Stage_endpoint.png](../pics/user_provision_approach/API_Stage_endpoint.png)
-
-3. Setup **Lambda**
-    1. Create Function
+2. Setup **Lambda**
+    1. Create Function, Function name: "IoTProvision_Lambda"
        ![Lambda_setting_1.png](../pics/user_provision_approach/Lambda_setting_1.png)
     2. copy the following code to replace the code, lambda_function.py
        ![Lambda_setting_2.png](../pics/user_provision_approach/Lambda_setting_2.png)
@@ -241,9 +157,96 @@ Here’s the tutorial for setting up AWS Service including AWS Cognito, AWS API 
             }
         ```
 
-    3. Add policy: AmazonDynamoDBFullAccess, AmazonAPIGatewayAdministrator, AWSIoTFullAccess
-       ![Lambda_policy_1.png](../pics/user_provision_approach/UserPool_CreatePool.png)
-       ![Lambda_policy_2.png](../pics/user_provision_approach/UserPool_CreatePool.png)
+    3. Go to Execution role to modify policy.
+       ![Lambda_policy_1.png](../pics/user_provision_approach/Lambda_policy_1.png)
+       Add policy: AmazonDynamoDBFullAccess, AmazonAPIGatewayAdministrator, AWSIoTFullAccess
+       ![Lambda_policy_2.png](../pics/user_provision_approach/Lambda_policy_2.png)
+
+3. Setup **AWS API Gateway**
+    1. Create API, and then choose REST API.
+       ![Create_API.png](../pics/user_provision_approach/Create_API.png)
+    2. Choose NewAPI and fill in API name “IoTProvision_API”, then create.
+        ![Create_API_Name.png](../pics/user_provision_approach/Create_API_Name.png)
+        1. Now that, we can start configure the following settings with red rectangle, then back to setup Resource method.
+
+        ![API_configuration.png](../pics/user_provision_approach/API_configuration.png)
+    3. Authorizers configuration
+        1. Name: “IoTProvision_Authorizer” 
+        2. Select Cognito
+        3. Cognito User Pool “IoTProvisionUserPool”
+        4. Token Source “Authorization”
+        5. Create
+        ![API_Authorizer.png](../pics/user_provision_approach/API_Authorizer.png)
+    4. Model configuration
+        1. Create method used by API Method.
+            1. Name: “CertReplay“
+            2. Content type: “applicaiton/json”
+            3. Fill in Model schema.
+            ![API_Model.png](../pics/user_provision_approach/API_Model.png)
+
+            ```json
+            {
+              "$schema": "http://json-schema.org/draft-04/schema#",
+              "title": "IoTProvisionInputModel",
+              "type": "object",
+              "properties": {
+                "certificatePem": { "type": "string" },
+                "privateKey": { "type": "string" }
+              }
+            }
+            ```
+
+    5. Resource configuration
+        1. Resource Name “cert”
+        2. Create Resource
+            ![API_Resource_Create.png](../pics/user_provision_approach/API_Resource_Create.png)
+        3. Action → Create Method.
+            1. Select “GET”
+            ![API_Resorce_create_method.png](../pics/user_provision_approach/API_Resorce_create_method.png)
+        4. The method setup
+            ![API_Model_setup.png](../pics/user_provision_approach/API_Model_setup.png)
+            1. Integration type → Lambda function.
+            2. Lambda function → IoTProvision_Lambda
+            3. Then save.
+        5. Configure GET - Method Execution
+            ![API_Get_method_execution.png](../pics/user_provision_approach/API_Get_method_execution.png)
+            1. Configure Method Request
+               ![API_Method_Request.png](../pics/user_provision_approach/API_Method_Request.png)
+            2. Configure Integration Request
+               ![API_Integration_Request_1.png](../pics/user_provision_approach/API_Integration_Request_1.png)
+                1. application/json
+
+                    ```json
+                    #set($inputRoot = $input.path('$'))
+                    {
+                      "params": {
+                        "querystring": {
+                          "SN": "$input.params('sn')"
+                        }
+                      }
+                    }
+                    ```
+
+            3. Configure Integration Response
+                ![API_Integration_Response.png](../pics/user_provision_approach/API_Integration_Response.png)
+                1. application/json
+
+                    ```json
+                    #set($inputRoot = $input.path('$'))
+                    {
+                      "certificatePem" : $input.json('$.body.certificatePem'),
+                      "privateKey" : $input.json('$.body.privateKey')
+                    }
+                    ```
+
+            4. Configure Method Response
+                ![API_Method_Response.png](../pics/user_provision_approach/API_Method_Response.png)
+    6. Deploy API to generate endpoint
+        ![API_Deploy.png](../pics/user_provision_approach/API_Deploy.png)
+        ![API_Deploy_stage_name.png](../pics/user_provision_approach/API_Deploy_stage_name.png)
+    7. Check endpoint in Stages
+        ![API_Stage_endpoint.png](../pics/user_provision_approach/API_Stage_endpoint.png)
+
 4. Setup **Dynamo DB**
     1. Create Table:
         1. Table name: DSN

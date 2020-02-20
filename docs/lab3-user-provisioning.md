@@ -274,6 +274,9 @@ Here’s the tutorial for setting up AWS Service including AWS Cognito, AWS API 
     ![Android_app_config_api_endpoint.png](../pics/user_provision_approach/Android_app_config_api_endpoint.png)
 3. Build and app and install it to the Android Phone, then register your account by AWS Cognito.
 
+**Notice: If you run into build error because of sdk, please install the sdk by clicking "install missing sdk package(s)".**
+![Android_app_install_sdk.png](../pics/user_provision_approach/Android_app_install_sdk.png)
+
 ## Step 3. - Build and Run the Amazon FreeRTOS approach 1 Project
 
 1. Fill in Soft AP SSID and password in amazon-freertos\demos\realtek\amebaz2\common\config_files\aws_wifi_config.h

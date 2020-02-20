@@ -280,8 +280,13 @@ Here’s the tutorial for setting up AWS Service including AWS Cognito, AWS API 
 ![SoftAPSSID_in_code.png](../pics/user_provision_approach/SoftAPSSID_in_code.png)
 2. Fill in your endpoint information in amazon-freertos\demos\common\include\aws_clientcredential.h
 ![endpoint_in_code.png](../pics/user_provision_approach/endpoint_in_code.png)
-3. Build and flash to the device by IAR IDE, then reset the device to let it enter SoftAP mode.
+3. Before flash the device, please earse the memory first.
+![IAR_erase_memory.png](../pics/user_provision_approach/IAR_erase_memory.png)
+4. Build and flash to the device by IAR IDE, then reset the device to let it enter SoftAP mode.
 ![IAR_build.png](../pics/user_provision_approach/IAR_build.png)
+
+**Notice: You could take use of the following link to install USB UART driver to check system log on UART port.**
+https://www.ftdichip.com/Drivers/CDM/CDM21228_Setup.zip
 
 ## Step 4. - Use the android app to get the user credential from AWS Service
 
@@ -315,7 +320,7 @@ There will be a pop-up a message to show the provision result.
 
 ![step3_page_reply.jpg](../pics/user_provision_approach/step3_page_reply.jpg)
 
-**Notice: There is a timeout in device soft AP started after android app connecting to it. If time’s up with no provision, then you need to push the reset button to restart the soft AP process. You can configure this timeout here:**
+**Notice: There is a timeout in device soft AP started after android app connecting to it. If time’s up with no provision, then you need to push the reset button to restart the soft AP process. You can configure this timeout for your customization here:**
 ![app_device_connection_timeout.png](../pics/user_provision_approach/app_device_connection_timeout.png)
 
 ## Step 8. - Check the user credential work or not. (By AWS IoT Core Test)

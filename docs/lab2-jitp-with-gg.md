@@ -276,9 +276,9 @@ import boto3
 import time
 from botocore.exceptions import ClientError
 
-iot = boto3.client('iot', region_name='ap-southeast-1')
+iot = boto3.client('iot')
 dynamodb = boto3.client('dynamodb')
-gg = boto3.client('greengrass', region_name='ap-southeast-1')
+gg = boto3.client('greengrass')
 
 policy = {
 "Version": "2012-10-17",
@@ -476,7 +476,7 @@ Now that you have created an AWS Lambda function, you can create a rule that inv
     ```
     SELECT * FROM '$aws/events/certificates/registered/<caCertificateID>'
     ```
-    **SQL version:** 2016-03-23-beta
+    **SQL version:** 2016-03-23
 
     Note: Replace <caCertificateId> with the ID of the registered CA certificate.
 - For Choose an action, choose Insert this message into a code function and execute it (AWS Lambda).
@@ -520,7 +520,7 @@ $ wget https://d1onfpft10uf5o.cloudfront.net/greengrass-core/downloads/1.10.0/gr
 untar and install it into the OS
 
 ```
-sudo tar -xzvf greengrass-OS-architecture-1.10.0.tar.gz -C /
+sudo tar -xzvf greengrass-linux-x86-64-1.10.0.tar.gz -C /
 ```
 
 Download rootCA
@@ -555,7 +555,7 @@ here is the config.json template you will create.
     ![](../pics/lab2/p20_lab2.png)
 
 
-- Also please noted that a thing named **device_jitr_0309_workshop** is will be created by the lambda function, you will need to change it if you've modified the lambda function
+- Also please noted that a thing named **device_jitr_0309_workshop**  will be created by the lambda function, you will need to change it if you've modified the lambda function
 
 ```
 {
@@ -644,3 +644,10 @@ check if greengrass group **jitr_group_device_jitr_0309_workshop** is created
 Fianlly deploy the greengrass group and it should deploy successfully
 
 ![](../pics/lab2/p24_lab2.png)
+
+
+noted that, if this is the first time you deploy greengrass in this region you will see the following two message
+
+![](../pics/lab2/p25_lab2.png)
+
+![](../pics/lab2/p26_lab2.png)

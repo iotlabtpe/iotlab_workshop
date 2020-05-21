@@ -470,11 +470,14 @@ Now that you have created an AWS Lambda function, you can create a rule that inv
 
 - In the AWS IoT console, navigate to **Act**.
 - Choose Create a rule.
-- Type a name and description for the rule.
-    Enter the following settings for the rule:
-    SQL version: 2016-03-23-beta
-    Attribute: *
-    Topic filter: $aws/events/certificates/registered/<caCertificateID> Note: Replace <caCertificateId> with the ID of the registered CA certificate.
+- Type a name as **jitr_workshop_rule** and description for the rule.
+    Enter the following settings for the Rule query statement:
+    ```
+    SELECT * FROM '$aws/events/certificates/registered/<caCertificateID>'
+    ```
+    **SQL version:** 2016-03-23-beta
+
+    Note: Replace <caCertificateId> with the ID of the registered CA certificate.
 - For Choose an action, choose Insert this message into a code function and execute it (AWS Lambda).
 - From Function name, choose your AWS Lambda function name you've created in the previous section(**jitr-gg-create-lambda**), and then choose Add action.
 - Choose Create to create your AWS Lambda function.

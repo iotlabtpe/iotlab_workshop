@@ -43,7 +43,7 @@ In this lab you will:
 
 4. walk through the setup for your EC2
    
-- step 2: Choose Instance Type : t2.small then click **review and launch**
+- step 2: Choose Instance Type : t2.micro then click **review and launch**
 - Step 7: Review Instance Launch
 
 5. Save key and launch

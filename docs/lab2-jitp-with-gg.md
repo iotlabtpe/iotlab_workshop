@@ -65,7 +65,7 @@ Follow the instructions on the Connect To Your Instance page to connect to your 
 
 ![](../pics/lab2/p4_lab2.png)
 
-You can use PuTTY for Windows or Terminal for macOS. For more information, see Connect to Your Linux Instance in the Amazon EC2 User Guide for Linux Instances.
+You can use [PuTTY for Windows](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/putty.html) or Terminal for macOS. For more information, see Connect to Your Linux Instance in the Amazon EC2 User Guide for Linux Instances.
 
 2. Install [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/install-linux.html)
 
@@ -78,7 +78,7 @@ in the terminal, input above cmd and check if the following menue prompts
 
 3. type [aws configure](https://docs.aws.amazon.com/cli/latest/userguide/acli-chap-configure.html) on the console to configure your aws cli
 
-make sure when your aws creadentials and configure are prperly set
+make sure when your aws creadentials and configure are properly set
 
 ```
 ubuntu@ip-172-31-20-239:~$ cat ~/.aws/credentials 

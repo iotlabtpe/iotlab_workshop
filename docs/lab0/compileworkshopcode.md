@@ -76,7 +76,7 @@ Once compilation is done, download these 3 files to your local computer:
 
 ![download bin files from Cloud9](../../pics/lab0/workshop-download.png)
 
-> Note: the "build" folder is located in ~/environment/workshop/amazon-freertos/vendors/espressif/boards/m5stickc/aws_demos/build
+> Note: the "build" folder is located in ~/environment/amazon-freertos/vendors/espressif/boards/esp32/aws_demos/build
 
 
 ## Next Step

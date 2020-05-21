@@ -5,8 +5,8 @@ permalink: /lab0/flashing
 
 1. Download and install Silicon Labs [CP2104 drivers](https://www.silabs.com/products/development-tools/software/usb-to-uart-bridge-vcp-drivers)
 
-2. Connect your ESP32 DevKitC board to the laptop using provided USB cable and identify which port it is connected to
-On Windows it will be ```COM3``` for example, on Mac OS typically it enumerated as ```/dev/tty.SLAB_USBtoUART``` and on Linux most likely ```/dev/ttyUSB0```
+2. Connect your M5StickC to the laptop using provided USB cable and identify which port it is connected to
+On Windows it will be ```COM3``` for example, on Mac OS typically it enumerated as ```/dev/cu.usbserial-XXXXXXXX``` or ```/dev/tty.SLAB_USBtoUART``` and on Linux most likely ```/dev/ttyUSB0```
 
 3. Install [esptool](https://github.com/espressif/esptool) and flash the firware
 
@@ -27,7 +27,7 @@ sudo pip install esptool pyserial
 
 ```bash
 cd [THE FOLDER WHERE YOU DOWNLOADED THE 3 FILES IN PREVIOUS STEP]
-esptool.py --chip esp32 --port /dev/tty.SLAB_USBtoUART --baud 115200 --before default_reset --after hard_reset write_flash -z --flash_mode dio --flash_freq 40m --flash_size detect 0x1000 bootloader.bin 0x20000 aws_demos.bin 0x8000 partition-table.bin
+esptool.py --chip esp32 --port /dev/cu.usbserial-XXXXXXXX --baud 115200 --before default_reset --after hard_reset write_flash -z --flash_mode dio --flash_freq 40m --flash_size detect 0x1000 bootloader.bin 0x20000 aws_demos.bin 0x8000 partition-table.bin
 ```
 
 1. Monitor the flashing process:
@@ -92,7 +92,7 @@ Hard resetting via RTS pin...
 5.2.1 Use ```screen``` command to see the ESP32 console:
 
 ```bash
-screen /dev/tty.SLAB_USBtoUART 115200
+screen /dev/cu.usbserial-XXXXXXXX 115200
 ```
 
 5.2.2 In order to exit screen press ```Ctrl + A``` and then ```K```

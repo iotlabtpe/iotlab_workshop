@@ -334,7 +334,7 @@ def delete_cert_and_policy(deviceId, principals):
             principal=principal
         )
     while True:
-        resp = iotClient.list_thing_principals(
+        resp = iot.list_thing_principals(
             thingName=deviceId
         )
         if not resp['principals']:
@@ -357,6 +357,9 @@ def lambda_handler(event, context):
         response = iot.describe_thing(
             thingName=deviceId
         )
+        print (response)
+        print("thing already exists!!")
+        raise Exception("thing already exists!!")
     except ClientError as e:
         response = iot.create_thing(
             thingName=deviceId

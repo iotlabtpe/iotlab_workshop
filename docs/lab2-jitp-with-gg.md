@@ -471,6 +471,7 @@ Now that you have created an AWS Lambda function, you can create a rule that inv
 - In the AWS IoT console, navigate to **Act**.
 - Choose Create a rule.
 - Type a name as **jitr_workshop_rule** and description for the rule.
+    
     Enter the following settings for the Rule query statement:
     ```
     SELECT * FROM '$aws/events/certificates/registered/<caCertificateID>'

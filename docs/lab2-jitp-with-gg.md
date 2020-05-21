@@ -453,9 +453,10 @@ def lambda_handler(event, context):
                     **group_args
                 )
         print(grp)
-    ```
-    it should look like the following
-    ![](../pics/lab2/p15_lab2.png)
+```
+    
+it should look like the following
+![](../pics/lab2/p15_lab2.png)
 
 - Now, scroll down and edit the **basic settings**, edite and update the **Timeout** to more then 30 seconds as following:
     ![](../pics/lab2/p16_lab2.png)

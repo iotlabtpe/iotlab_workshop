@@ -87,7 +87,7 @@ aws_access_key_id = XXXXXYour_IAM_user_key_idXXXXXX
 aws_secret_access_key = XXXXXYour_IAM_user_keyXXXXXX
 ubuntu@ip-172-31-20-239:~$ cat ~/.aws/config 
 [default]
-output = text
+output = json
 region = ap-southeast-1
 ```
 
@@ -153,6 +153,7 @@ You can make a describe-ca-certificate call to get the information on the regist
 ```
 $ aws iot describe-ca-certificate --certificate-id <certificateId>
 ```
+
 
 Next, you will activate the CA certificate with following cmd
 
@@ -268,7 +269,8 @@ Now, verify your role, it should have **greengrass_provision_policy**
 - - please noted that at this point the lambda function has no trigger source, it will be updated after the IoT rule is created
 ![](../pics/lab2/p14_lab2.png)
 - Scroll down to the AWS Lambda function code section of the page. Replace the existing code with the following code, and click **Save**
-    ```
+
+```
 import json
 import boto3
 import time

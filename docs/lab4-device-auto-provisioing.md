@@ -107,22 +107,24 @@ In this lab, we use device Wi-Fi MAC address as device serial number (DSN). To v
     zip -r jitrSampleFunction.zip * .[^.]*
     ```
 
-2. Login to AWS management console, search and click **Lambda**.
+2. Download jitrSampleFunction.zip from AWS Cloud9.
+
+3. Login to AWS management console, search and click **Lambda**.
 
     ![p8_lab4.png](../pics/lab4/p8_lab4.png)
-3. In Lambda console, click **Create function**.
+4. In Lambda console, click **Create function**.
 
     ![p9_lab4.png](../pics/lab4/p9_lab4.png)
-4. Click **Author from scratch**, giving a function name **jitrDemoFunction**. Select **Python 3.6** and **Create a new role with basic Lambda permissions** in **Choose or create an execution role**. Click **Create function**.
+5. Click **Author from scratch**, giving a function name **jitrDemoFunction**. Select **Python 3.6** and **Create a new role with basic Lambda permissions** in **Choose or create an execution role**. Click **Create function**.
 
     ![p10_lab4.png](../pics/lab4/p10_lab4.png)
-5. In **Function code**, choose **Upload a .zip file** then click **Upload** to upload sample code you downloaded.
+6. In **Function code**, choose **Upload a .zip file** then click **Upload** to upload sample code you downloaded.
 
     ![p11_lab4.png](../pics/lab4/p11_lab4.png)
-6. Roll down the page to **Execution role** and click **View the jitrDemoFuntion-role-xxxxx** role on the IAM console.
+7. Roll down the page to **Execution role** and click **View the jitrDemoFuntion-role-xxxxx** role on the IAM console.
 
     ![p12_lab4.png](../pics/lab4/p12_lab4.png)
-7. In IAM console, you would see the role you just created. Click **Edit policy** and paste the following policies. After pasting this policies, click **Review policy** and then click **Save changes**.
+8. In IAM console, you would see the role you just created. Click **Edit policy** and paste the following policies. After pasting this policies, click **Review policy** and then click **Save changes**.
 
     ```json
     {
@@ -173,7 +175,7 @@ In this lab, we use device Wi-Fi MAC address as device serial number (DSN). To v
 
     ![p13_lab4.png](../pics/lab4/p13_lab4.png)
     ![p14_lab4.png](../pics/lab4/p14_lab4.png)
-8. Switch back to Lambda console, click **Save**.
+9. Switch back to Lambda console, click **Save**.
     ![p15_lab4.png](../pics/lab4/p15_lab4.png)
 
 ## Configure AWS IoT Rule
@@ -210,7 +212,7 @@ In this lab, we use device Wi-Fi MAC address as device serial number (DSN). To v
     git am ../0001-Add-IoT-Lab-Workshop-Device-Auto-Provision-sample-co.patch
     ```
 
-2. Before build code, Download the CAs certificate, private key and tools from Cloud9. Use **PEMfileToCString.html** to generate C string. Please select the **CA_Certificate.pem** you just create above and click **Display formatted PEM stting to be copied into aws_clientdential_keys.h**. Paste it into filed **keyJITR_DEVICE_CERTIFICATE_AUTHORITY_PEM** in **~/environment/aws-iot-device-auto-provisioning-approach/amazon-freertos/amazon-freertos/demos/include/aws_clientcredential_keys.h**.
+2. Before build code, Download the CAs certificate, private key and tools folder from Cloud9. Use **PEMfileToCString.html** to generate C string. Please select the **CA_Certificate.pem** you just create above and click **Display formatted PEM stting to be copied into aws_clientdential_keys.h**. Paste it into filed **keyJITR_DEVICE_CERTIFICATE_AUTHORITY_PEM** in **~/environment/aws-iot-device-auto-provisioning-approach/amazon-freertos/amazon-freertos/demos/include/aws_clientcredential_keys.h**.
 
     ![p22_lab4.png](../pics/lab4/p22_lab4.png)
     ![p23_lab4.png](../pics/lab4/p23_lab4.png)

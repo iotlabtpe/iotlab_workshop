@@ -67,7 +67,7 @@ Follow the instructions on the Connect To Your Instance page to connect to your 
 
 You can use PuTTY for Windows or Terminal for macOS. For more information, see Connect to Your Linux Instance in the Amazon EC2 User Guide for Linux Instances.
 
-2. Install[AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/install-linux.html)
+2. Install [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/install-linux.html)
 
 ```
 aws cli
@@ -76,7 +76,7 @@ in the terminal, input above cmd and check if the following menue prompts
 
  ![](../pics/lab2/p5_lab2.png)
 
-3. [aws configure](https://docs.aws.amazon.com/cli/latest/userguide/acli-chap-configure.html) 
+3. type [aws configure](https://docs.aws.amazon.com/cli/latest/userguide/acli-chap-configure.html) on the console to configure your aws cli
 
 make sure when your aws creadentials and configure are prperly set
 

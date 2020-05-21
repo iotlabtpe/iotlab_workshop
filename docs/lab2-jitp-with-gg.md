@@ -349,7 +349,7 @@ def lambda_handler(event, context):
         certificateId=certId)
     certificatePem = response['certificateDescription']['certificatePem']
     print(certificatePem)
-    deviceId = 'device_jitr'  + '_0309_workshop'
+    deviceId = 'device_jitr'  + '_0522_workshop'
     certificateArn = response['certificateDescription']['certificateArn']
 
     # create thing
@@ -555,7 +555,7 @@ here is the config.json template you will create.
     ![](../pics/lab2/p20_lab2.png)
 
 
-- Also please noted that a thing named **device_jitr_0309_workshop**  will be created by the lambda function, you will need to change it if you've modified the lambda function
+- Also please noted that a thing named **device_jitr_0522_workshop**  will be created by the lambda function, you will need to change it if you've modified the lambda function
 
 ```
 {
@@ -563,7 +563,7 @@ here is the config.json template you will create.
     "caPath" : "root.ca.pem",
     "certPath" : "jitr.crt",
     "keyPath" : "jitr.key",
-    "thingArn" : "arn:aws:iot:<region>:<accountId>:thing/device_jitr_0309_workshop",
+    "thingArn" : "arn:aws:iot:<region>:<accountId>:thing/device_jitr_0522_workshop",
     "iotHost" : "<your_iot_endpoint>",
     "ggHost" : "greengrass-ats.iot.<region>.amazonaws.com",
     "keepAlive" : 600
@@ -628,16 +628,16 @@ Greengrass successfully started with PID: 20321
 
 # Verifiy the group is successfully provisioned and deploy it
 
-check if policy **Policy_device_jitr_0309_workshop** is created
+check if policy **Policy_device_jitr_0522_workshop** is created
 
 ![](../pics/lab2/p21_lab2.png)
 
-check if thing name **device_jitr_0309_workshop** is created
+check if thing name **device_jitr_0522_workshop** is created
 
 
 ![](../pics/lab2/p22_lab2.png)
 
-check if greengrass group **jitr_group_device_jitr_0309_workshop** is created
+check if greengrass group **jitr_group_device_jitr_0522_workshop** is created
 
 ![](../pics/lab2/p23_lab2.png)
 

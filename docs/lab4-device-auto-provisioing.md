@@ -14,7 +14,7 @@ In this Lab, you will generate JITR approach 2 related configuration and test th
 ## Prerequisites
 
 1. AWS Cloud9 environment and install the building package as Lab0 indicates.
-2. Clone the sample package from [aws-iot-device-auto-provisioning-approach](aws-iot-device-auto-provisioning-approach).
+2. Clone the sample package from [aws-iot-device-auto-provisioning-approach](https://github.com/aws-samples/aws-iot-device-auto-provisioning-approach).
 
 ## Architecture
 
